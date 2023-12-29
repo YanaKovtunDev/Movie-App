@@ -25,3 +25,64 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+h1 {
+  font-size: 64px;
+  @apply font-semibold
+}
+
+h2 {
+  font-size: 48px;
+  @apply font-semibold
+}
+
+h5 {
+  font-size: 20px;
+  @apply font-semibold
+}
+
+
+/* Form styles */
+.input-field {
+  @apply ps-3 p-2 rounded-xl border border-input text-white bg-input w-full;
+}
+
+.input-field-half {
+  @apply w-auto
+}
+
+.input-field-error {
+  @apply border-red-500;
+}
+
+.error-message {
+  @apply text-error mt-2;
+}
+
+/* Button styles */
+.button-primary {
+  @apply bg-primary text-white py-3 px-6 rounded-xl hover:accent-primaryDark font-bold w-full disabled:bg-primaryLight;
+}
+
+.button-default {
+  @apply bg-inherit text-white py-3 rounded-xl hover:accent-primaryDark font-bold w-full border-2 border-white;
+}
+
+.upload-dnd {
+  @apply w-full border-2 border-dashed border-gray-300 rounded-lg p-6 text-center bg-input
+}
+
+.upload-img {
+  max-height: 504px;
+  @apply rounded-lg w-full  object-cover
+}
+
+.card-movie {
+  height: 504px !important;
+  @apply bg-card rounded-lg pt-3 px-3 pb-4 inline-flex flex-col h-36 gap-2 hover:bg-input cursor-pointer
+}
+
+.card-img {
+  height: 400px !important;
+  @apply w-full rounded-lg object-cover
+}
