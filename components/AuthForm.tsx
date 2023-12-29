@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { FC, useState } from 'react';
 import ROUTES from '@/constants/routes';
 import { signIn } from 'next-auth/react';
+import API from '@/constants/api';
 
 type AuthProps = {
   isSignUp?: boolean;
@@ -23,7 +24,7 @@ const AuthForm: FC<AuthProps> = ({ isSignUp }) => {
   const handleSubmit = async (values: any) => {
     if (isSignUp) {
       try {
-        const response = await fetch(ROUTES.SIGN_UP, {
+        const response = await fetch(API.SIGN_UP, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -8,6 +8,7 @@ import EmptyList from '@/components/EmptyList';
 import Layout from '@/components/Layout';
 import ROUTES from '@/constants/routes';
 import MovieCard from '@/components/MovieCard';
+import API from '@/constants/api';
 
 export default function Movies() {
   const { data } = useSession();
@@ -17,7 +18,7 @@ export default function Movies() {
   const router = useRouter();
   const fetchMovies = async () => {
     try {
-      const response = await fetch(`${ROUTES.GET_MOVIES}?email=${data?.user?.email}`);
+      const response = await fetch(`${API.GET_MOVIES}?email=${data?.user?.email}`);
 
       if (!response.ok) {
         setError('Failed to fetch movies');

@@ -6,6 +6,7 @@ import { ErrorMessage, Field, Form, Formik } from 'formik';
 import UploadDnD from '@/app/upload-dnd/page';
 import { IMovie } from '@/models/movie.model';
 import ROUTES from '@/constants/routes';
+import API from '@/constants/api';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required('Required'),
@@ -39,7 +40,7 @@ const MovieForm: FC<MovieProps> = ({ movieData }) => {
         validationSchema={validationSchema}
         onSubmit={async (values: any) => {
           try {
-            const response = await fetch(`${ROUTES.API_MOVIES}/${movieData ? 'edit/' + movieData?._id : 'create'}`, {
+            const response = await fetch(`${API.MOVIES}/${movieData ? 'edit/' + movieData?._id : 'create'}`, {
               method: `${movieData ? 'PUT' : 'POST'}`,
               headers: {
                 'Content-Type': 'application/json',
