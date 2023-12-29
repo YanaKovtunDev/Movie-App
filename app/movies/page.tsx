@@ -6,6 +6,8 @@ import { IMovie } from '@/models/movie.model';
 import { useRouter } from 'next/navigation';
 import EmptyList from '@/components/EmptyList';
 import Layout from '@/components/Layout';
+import ROUTES from '@/constants/routes';
+import MovieCard from '@/components/MovieCard';
 
 export default function Movies() {
   const { data } = useSession();
@@ -15,7 +17,7 @@ export default function Movies() {
   const router = useRouter();
   const fetchMovies = async () => {
     try {
-      const response = await fetch(`/api/movies/get?email=${data?.user?.email}`);
+      const response = await fetch(`${ROUTES.GET_MOVIES}?email=${data?.user?.email}`);
 
       if (!response.ok) {
         setError('Failed to fetch movies');
@@ -47,7 +49,7 @@ export default function Movies() {
           <header className="flex justify-between items-center p-4 mb-20">
             <div className="flex items-center">
               <h1 className="text-5xl text-white me-3">My movies</h1>
-              <PlusCircle className="cursor-pointer" size={32} onClick={() => router.push('/movies/create')} />
+              <PlusCircle className="cursor-pointer" size={32} onClick={() => router.push(ROUTES.CREATE_MOVIE)} />
             </div>
             <div className="flex items-center font-bold cursor-pointer" onClick={() => signOut()}>
               Logout <LogOut className="ms-2" />
@@ -55,19 +57,7 @@ export default function Movies() {
           </header>
 
           <div className="grid grid-cols-4 gap-6">
-            {movies?.map((movie, key) => (
-              <div key={key} className="card-movie" onClick={() => router.push(`/movies/${movie._id}`)}>
-                {movie?.poster ? (
-                  <img src={movie.poster} alt={movie.title} className="card-img" />
-                ) : (
-                  <div className="card-img flex items-center justify-center">No poster added</div>
-                )}
-                <div className="p-4">
-                  <h5 className="text-white">{movie?.title}</h5>
-                  <p className="text-gray-300">{movie.year}</p>
-                </div>
-              </div>
-            ))}
+            {movies?.map((movie, key) => <MovieCard key={key} movie={movie} />)}
           </div>
         </div>
       )}

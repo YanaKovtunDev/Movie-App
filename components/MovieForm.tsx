@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import UploadDnD from '@/app/upload-dnd/page';
 import { IMovie } from '@/models/movie.model';
+import ROUTES from '@/constants/routes';
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required('Required'),
@@ -32,13 +33,13 @@ const MovieForm: FC<MovieProps> = ({ movieData }) => {
       <Formik
         initialValues={{
           title: movieData?.title || '',
-          year: movieData?.year || 2023,
+          year: movieData?.year || new Date().getFullYear(),
         }}
         enableReinitialize
         validationSchema={validationSchema}
         onSubmit={async (values: any) => {
           try {
-            const response = await fetch(`/api/movies/${movieData ? 'edit/' + movieData?._id : 'create'}`, {
+            const response = await fetch(`${ROUTES.API_MOVIES}/${movieData ? 'edit/' + movieData?._id : 'create'}`, {
               method: `${movieData ? 'PUT' : 'POST'}`,
               headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +55,7 @@ const MovieForm: FC<MovieProps> = ({ movieData }) => {
               setError(errorData.message);
             } else {
               setError('');
-              router.push('/movies');
+              router.push(ROUTES.MOVIES);
             }
           } catch (error: any) {
             setError(error.message);
@@ -82,7 +83,7 @@ const MovieForm: FC<MovieProps> = ({ movieData }) => {
                   <ErrorMessage name="year" component="div" className="error-message" />
 
                   <div className="flex gap-4 mt-12">
-                    <button onClick={() => router.push('/movies')} className="button-default">
+                    <button onClick={() => router.push(ROUTES.MOVIES)} className="button-default">
                       Cancel
                     </button>
                     <button type="submit" disabled={isSubmitting} className="button-primary">

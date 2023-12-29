@@ -3,6 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { connectToDB } from '@/lib/mongoose';
 import { User } from '@/models/user.model';
 import bcrypt from 'bcrypt';
+import ROUTES from '@/constants/routes';
 
 interface Credentials {
   email: string;
@@ -43,7 +44,7 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/',
+    signIn: ROUTES.HOME,
   },
 };
 

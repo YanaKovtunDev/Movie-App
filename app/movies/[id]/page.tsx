@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import MovieForm from '@/components/MovieForm';
 import { IMovie } from '@/models/movie.model';
 import Layout from '@/components/Layout';
+import ROUTES from '@/constants/routes';
 
 export default function EditMovie() {
   const [error, setError] = useState('');
@@ -14,7 +15,7 @@ export default function EditMovie() {
 
   const fetchMovie = async () => {
     try {
-      const response = await fetch(`/api/movies/get/${id}`);
+      const response = await fetch(`${ROUTES.GET_MOVIES}/${id}`);
 
       if (!response.ok) {
         setError('Failed to fetch movie');
