@@ -1,20 +1,14 @@
 'use client';
 import '@uploadthing/react/styles.css';
-import { UploadDropzone } from '@uploadthing/react';
-import { OurFileRouter } from '../api/uploadthing/core';
-import { FC } from 'react';
+import { UploadDropzone } from '@/utils/uploadthing';
 import { Download } from 'lucide-react';
 
-interface UploadDnDProps {
-  updateImage: (src: string) => void;
-  imageUrl?: string;
-}
-const UploadDnD: FC<UploadDnDProps> = ({ updateImage, imageUrl }) => {
+export default function UploadDnD({ updateImage, imageUrl }: any) {
   return (
     <main>
       {!imageUrl ? (
         <div className="upload-dnd">
-          <UploadDropzone<OurFileRouter>
+          <UploadDropzone
             endpoint="imageUploader"
             onClientUploadComplete={(uploadResults) => {
               if (uploadResults && uploadResults.length > 0) {
@@ -24,9 +18,7 @@ const UploadDnD: FC<UploadDnDProps> = ({ updateImage, imageUrl }) => {
             onUploadError={(error: Error) => {
               alert(`ERROR! ${error.message}`);
             }}
-          >
-            <p className="text-white">Drop an image here</p>
-          </UploadDropzone>
+          />
         </div>
       ) : (
         <div className="flex items-center flex-col">
@@ -42,6 +34,4 @@ const UploadDnD: FC<UploadDnDProps> = ({ updateImage, imageUrl }) => {
       )}
     </main>
   );
-};
-
-export default UploadDnD;
+}

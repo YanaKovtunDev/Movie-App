@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import UploadDnD from '@/app/upload-dnd/page';
+import UploadDnD from '@/components/UploadDnD';
 import { IMovie } from '@/models/movie.model';
 import ROUTES from '@/constants/routes';
 import API from '@/constants/api';
